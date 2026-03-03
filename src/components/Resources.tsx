@@ -4,7 +4,7 @@ export default function Resources() {
       title: "IDEON ICHRA Rate Map",
       description:
         "Interactive map comparing small group ICHRA rates to traditional small group premiums across all 50 states.",
-      url: "https://www.ideonhealth.com/ichra-map",
+      url: "https://ideonapi.com/ideon-ichra-insights-by-state/",
       icon: "🗺️",
     },
     {

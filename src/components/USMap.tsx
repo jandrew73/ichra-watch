@@ -6,6 +6,7 @@ import {
   Geographies,
   Geography,
   ZoomableGroup,
+  Marker,
 } from "react-simple-maps";
 import {
   stateLegislation,
@@ -34,6 +35,19 @@ const fipsToState: Record<string, string> = {
 
 const stateDataMap = new Map<string, StateLegislation>();
 stateLegislation.forEach((s) => stateDataMap.set(s.stateCode, s));
+
+// Centroid coordinates [longitude, latitude] for states with active legislation
+const stateCentroids: Record<string, [number, number]> = {
+  IN: [-86.13, 39.85],
+  OH: [-82.76, 40.39],
+  GA: [-83.44, 32.68],
+  MS: [-89.68, 32.74],
+  TX: [-99.90, 31.47],
+  AZ: [-111.09, 34.05],
+  WI: [-89.62, 44.26],
+  NH: [-71.57, 43.19],
+  FL: [-81.52, 27.66],
+};
 
 function StateTooltip({ data }: { data: StateLegislation }) {
   return (
@@ -166,6 +180,30 @@ function USMap() {
                 })
               }
             </Geographies>
+            {/* State abbreviation labels for active states */}
+            {stateLegislation.map((s) => {
+              const coords = stateCentroids[s.stateCode];
+              if (!coords) return null;
+              return (
+                <Marker key={s.stateCode} coordinates={coords}>
+                  <text
+                    textAnchor="middle"
+                    style={{
+                      fontFamily: "system-ui, sans-serif",
+                      fontSize: 10,
+                      fontWeight: 700,
+                      fill: "#1e293b",
+                      pointerEvents: "none",
+                      textShadow:
+                        "0 0 3px rgba(255,255,255,0.9), 0 0 3px rgba(255,255,255,0.9)",
+                    }}
+                    dy={4}
+                  >
+                    {s.stateCode}
+                  </text>
+                </Marker>
+              );
+            })}
           </ZoomableGroup>
         </ComposableMap>
       </div>
