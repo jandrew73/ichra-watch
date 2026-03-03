@@ -84,7 +84,7 @@ export default function SponsorsPage() {
                 Interested in supporting ICHRA Legislation Watch?
               </p>
               <a
-                href="mailto:info@ichrawatch.com"
+                href="mailto:info@ichratracker.com"
                 className="inline-flex items-center gap-2 bg-blue-600 text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-blue-700 transition-colors"
               >
                 Become a Sponsor

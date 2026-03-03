@@ -62,7 +62,7 @@ export default function Footer() {
               This project is supported by its sponsors. Interested in
               sponsoring?{" "}
               <a
-                href="mailto:info@ichrawatch.com"
+                href="mailto:info@ichratracker.com"
                 className="text-blue-400 hover:text-blue-300"
               >
                 Get in touch
