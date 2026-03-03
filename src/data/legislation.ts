@@ -1,5 +1,5 @@
 // ICHRA Legislation Tracker - Data File
-// Last updated: 2026-03-03
+// Last updated: 2026-03-03 (fact-checked and corrected)
 // Phase 1: Manual updates. Phase 2: LegiScan API integration.
 
 export type LegislationStatus =
@@ -67,17 +67,17 @@ export const stateLegislation: StateLegislation[] = [
     stateCode: "IN",
     status: "enacted",
     billNumber: "HB 1004",
-    billName: "ICHRA Tax Credit Program",
+    billName: "HRA Tax Credit Program",
     summary:
-      "First state to enact an ICHRA tax credit. Provides credits to small employers offering ICHRAs to employees.",
+      "First state to enact an HRA tax credit. Provides credits to small employers offering HRAs (including ICHRAs and QSEHRAs) to employees.",
     taxCredit: "$400/employee (Year 1), $200/employee (Year 2)",
     eligibility: "Employers with fewer than 50 employees",
     cap: "$10 million annual program cap",
     houseStatus: "passed",
     senateStatus: "passed",
-    lastAction: "Signed into law by Governor",
-    lastActionDate: "2024-01-15",
-    sourceUrl: "https://iga.in.gov/legislative/2024/bills/house/1004",
+    lastAction: "Signed into law by Governor Holcomb (effective Jan 1, 2024)",
+    lastActionDate: "2023-05-04",
+    sourceUrl: "https://iga.in.gov/legislative/2023/bills/house/1004",
   },
   {
     state: "Ohio",
@@ -92,26 +92,26 @@ export const stateLegislation: StateLegislation[] = [
     houseStatus: "passed",
     senateStatus: "pending",
     lastAction: "Passed House unanimously; referred to Senate",
-    lastActionDate: "2025-06-15",
+    lastActionDate: "2025-06-04",
     sourceUrl:
       "https://www.legislature.ohio.gov/legislation/136/hb133",
   },
   {
     state: "Georgia",
     stateCode: "GA",
-    status: "passed_one_chamber",
+    status: "introduced",
     billNumber: "HB 1110",
     billName: "Georgia Small Business Healthcare Affordability Act",
     summary:
-      "Bipartisan bill providing tiered tax credits to small employers offering ICHRAs. Passed House, pending Senate.",
+      "Bipartisan bill providing tiered tax credits to small employers offering ICHRAs. Currently in House committee.",
     taxCredit:
       "$600/employee (Years 1-3), $400/employee (Year 4), $200/employee (Year 5)",
     eligibility: "Employers with 10 or fewer employees",
     cap: "$5 million annual program cap",
-    houseStatus: "passed",
-    senateStatus: "pending",
-    lastAction: "Passed House; referred to Senate Insurance Committee",
-    lastActionDate: "2026-03-02",
+    houseStatus: "committee",
+    senateStatus: "not_introduced",
+    lastAction: "Referred to House Ways and Means Committee",
+    lastActionDate: "2026-02-03",
     sourceUrl:
       "https://www.legis.ga.gov/legislation/76893",
   },
@@ -139,11 +139,12 @@ export const stateLegislation: StateLegislation[] = [
     status: "introduced",
     billNumber: "SB 1949",
     summary:
-      "Introduced legislation to provide state tax credit for employers offering ICHRAs.",
+      "Proposed state tax refund for small employers adopting ICHRAs. The 89th Legislature adjourned sine die without advancing the bill.",
     taxCredit: "Up to $400/employee",
     houseStatus: "not_introduced",
     senateStatus: "committee",
-    lastAction: "Referred to Senate Committee on Business & Commerce",
+    lastAction:
+      "Referred to Senate Committee on Business & Commerce; 89th Legislature adjourned sine die",
     lastActionDate: "2025-03-10",
     sourceUrl:
       "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1949",
@@ -191,12 +192,16 @@ export const stateLegislation: StateLegislation[] = [
     stateCode: "FL",
     status: "introduced",
     billNumber: "HB 141",
+    billName: "Florida Employee Health Choices Program",
     summary:
-      "Proposes state-facilitated ICHRA platform for small employers, targeted launch January 2028.",
+      "Creates a state-facilitated platform for employees enrolled in ICHRAs to purchase individual health insurance plans. Effective July 1, 2026. Companion bills: SB 440, SB 1460.",
     houseStatus: "committee",
     senateStatus: "not_introduced",
-    lastAction: "Introduced; referred to House Health & Human Services",
-    lastActionDate: "2025-12-01",
+    lastAction:
+      "Passed Health Care Facilities & Systems Subcommittee 12-3; referred to Insurance & Banking Subcommittee",
+    lastActionDate: "2026-01-13",
+    sourceUrl:
+      "https://www.myfloridahouse.gov/Sections/Bills/billsdetail.aspx?BillId=80953",
   },
 ];
 
@@ -248,7 +253,7 @@ export const federalBills: FederalBill[] = [
     senateStatus: "passed",
     signedIntoLaw: true,
     lastAction: "Signed into law — but CHOICE provisions were removed in Senate",
-    lastActionDate: "2025-07-15",
+    lastActionDate: "2025-07-04",
     congress: "119th",
     sourceUrl: "https://www.congress.gov/bill/119th-congress/house-bill/1",
     notes:
@@ -263,10 +268,10 @@ export const federalBills: FederalBill[] = [
 export const newsItems: NewsItem[] = [
   {
     id: "news-1",
-    date: "2026-03-02",
-    headline: "Georgia House Passes ICHRA Tax Credit Bill",
+    date: "2026-02-03",
+    headline: "Georgia ICHRA Tax Credit Bill Advances in Committee",
     summary:
-      "HB 1110, the Georgia Small Business Healthcare Affordability Act, passes the House with bipartisan support. Now heads to the Senate.",
+      "HB 1110, the Georgia Small Business Healthcare Affordability Act, is referred to the House Ways and Means Committee for consideration.",
     state: "GA",
     type: "state",
   },

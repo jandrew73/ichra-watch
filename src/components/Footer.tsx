@@ -81,7 +81,24 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Divider */}
+        {/* Disclaimer */}
+        <div className="border-t border-slate-800 pt-6 mb-6">
+          <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-4">
+            <p className="text-xs text-slate-400 leading-relaxed">
+              <span className="font-semibold text-slate-300">Disclaimer:</span>{" "}
+              The information on this site is provided for general informational
+              purposes only and should not be construed as legal, tax, or
+              professional advice. While we strive for accuracy, legislation
+              statuses change frequently and data may not reflect the most
+              current developments. Always verify information with official state
+              legislature websites, Congress.gov, and qualified legal or tax
+              professionals before making business decisions. ICHRA Legislation
+              Watch is not responsible for any errors or omissions.
+            </p>
+          </div>
+        </div>
+
+        {/* Bottom Bar */}
         <div className="border-t border-slate-800 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-slate-500">
             © {new Date().getFullYear()} ICHRA Legislation Watch. Data updated

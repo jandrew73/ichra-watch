@@ -18,7 +18,8 @@ export default function Hero() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl mx-auto">
             <StatCard
               number={summaryStats.totalStatesWithActivity}
-              label="States Active"
+              label="States With Bills"
+              sublabel="Introduced or enacted"
               color="text-blue-400"
             />
             <StatCard
@@ -46,16 +47,21 @@ export default function Hero() {
 function StatCard({
   number,
   label,
+  sublabel,
   color,
 }: {
   number: number;
   label: string;
+  sublabel?: string;
   color: string;
 }) {
   return (
     <div className="bg-white/5 backdrop-blur rounded-lg p-4 border border-white/10">
       <div className={`text-3xl font-bold ${color}`}>{number}</div>
       <div className="text-sm text-slate-400 mt-1">{label}</div>
+      {sublabel && (
+        <div className="text-[10px] text-slate-500 mt-0.5">{sublabel}</div>
+      )}
     </div>
   );
 }

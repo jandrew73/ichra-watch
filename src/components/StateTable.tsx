@@ -53,7 +53,8 @@ export default function StateTable() {
                   className="border-b border-gray-100 hover:bg-gray-50 transition-colors"
                 >
                   <td className="py-3 px-4 font-semibold text-gray-900">
-                    {s.state}
+                    {s.state}{" "}
+                    <span className="text-gray-400 font-normal">({s.stateCode})</span>
                   </td>
                   <td className="py-3 px-4">
                     <div className="flex items-center gap-2">
@@ -102,7 +103,10 @@ export default function StateTable() {
               className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm"
             >
               <div className="flex items-center justify-between mb-2">
-                <h3 className="font-bold text-gray-900">{s.state}</h3>
+                <h3 className="font-bold text-gray-900">
+                      {s.state}{" "}
+                      <span className="text-gray-400 font-normal text-sm">({s.stateCode})</span>
+                    </h3>
                 <div className="flex items-center gap-1.5">
                   <div
                     className="w-2.5 h-2.5 rounded-full"
