@@ -33,46 +33,74 @@ _Status: **Complete** (launched March 2026)_
 
 ## Phase 2: LegiScan API Integration 🔜
 
-_Status: **Up Next**_
+_Status: **Up Next** — API access request submitted March 3, 2026 (pending approval)_
 
 The goal is to automate legislation data updates by integrating the [LegiScan API](https://legiscan.com/legiscan) so the site stays current without manual edits.
 
+### LegiScan License & Compliance
+- **License type:** Commercial, externally published
+- **Data license:** Creative Commons Attribution 4.0 (CC BY 4.0)
+- **Attribution required:** LegiScan must be credited as the legislative data source on the site
+- [ ] Add LegiScan attribution to footer and/or data source credits
+- [ ] Review CC BY 4.0 terms and ensure full compliance
+
+### Scope & Query Strategy
+- **Coverage:** All 50 states + federal (US Congress)
+- **Bill volume:** ~50–75 ICHRA-related bills active at any given time
+- **Polling cadence:** Weekly automated polling via REST API
+- **Query approach:** ICHRA-related keywords + known bill numbers
+- **Infrastructure:** Vercel serverless functions (dynamic IP pool)
+
+### Data Processing Pipeline
+- **Storage:** Structured SQL database for LegiScan results
+- **AI-assisted processing:** LLM tooling to summarize bill text and flag ICHRA-relevant provisions
+- **Human editorial review:** All AI-processed data reviewed by humans before publishing
+- **Workflow:** API fetch → SQL store → AI annotation → human review → publish to site
+
 ### 2.1 — LegiScan API Setup
-- [ ] Create LegiScan account and obtain API key
+- [ ] Receive API key approval from LegiScan
 - [ ] Store API key securely (Vercel environment variable)
 - [ ] Explore API endpoints: `getBill`, `getSearch`, `getMasterList`
 - [ ] Document rate limits and data structure
+- [ ] Choose and provision SQL database (e.g., Vercel Postgres, PlanetScale, Supabase)
 
 ### 2.2 — Data Pipeline
 - [ ] Build API utility (`src/lib/legiscan.ts`) to fetch bill data
+- [ ] Design database schema for bills, statuses, history, and metadata
 - [ ] Map LegiScan bill statuses → our `LegislationStatus` / `ChamberStatus` types
 - [ ] Normalize LegiScan data to match existing `StateLegislation` and `FederalBill` interfaces
 - [ ] Handle edge cases: bills with no status, unusual chamber flows, dead bills
 - [ ] Add `lastUpdated` timestamp to track data freshness
 
-### 2.3 — Scheduled Data Refresh
+### 2.3 — AI Summarization Layer
+- [ ] Build LLM pipeline to summarize bill text for ICHRA relevance
+- [ ] Flag ICHRA-specific provisions (tax credits, eligibility, caps)
+- [ ] Human review queue: admin interface to approve/edit AI summaries before publish
+- [ ] Fallback: manual summary entry when AI confidence is low
+
+### 2.4 — Scheduled Data Refresh
 - [ ] Create Next.js API route or serverless function for data fetching
-- [ ] Implement ISR (Incremental Static Regeneration) or cron-based revalidation
-- [ ] Set refresh interval (e.g., every 6 hours)
+- [ ] Implement weekly automated polling (cron job via Vercel or external scheduler)
 - [ ] Add fallback to static data if API is unavailable
 - [ ] Log update history for debugging
 
-### 2.4 — Congress.gov Integration (Federal Bills)
+### 2.5 — Congress.gov Integration (Federal Bills)
 - [ ] Research Congress.gov API or bulk data options
 - [ ] Build federal bill data fetcher (supplement LegiScan if needed)
 - [ ] Map federal bill statuses to existing `FederalBill` interface
 
-### 2.5 — Data Validation & Quality
+### 2.6 — Data Validation & Quality
 - [ ] Add data validation layer (reject bad/incomplete API responses)
 - [ ] Compare API data against known-good snapshot to catch anomalies
 - [ ] Build simple admin/status page to monitor data health
 - [ ] Alert mechanism if data hasn't updated in 24+ hours
 
-### 2.6 — Expand Coverage
+### 2.7 — Expand Coverage to All 50 States
 - [ ] Set up LegiScan keyword monitoring for ICHRA-related terms across all 50 states
 - [ ] Auto-detect new state bills as they're introduced
 - [ ] Auto-generate news items from significant status changes
 - [ ] Add more federal bills as they're introduced
+- [ ] Update map to show all 50 states with live data
 
 ---
 
