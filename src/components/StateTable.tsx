@@ -88,6 +88,12 @@ export default function StateTable() {
                   </td>
                   <td className="py-3 px-4 text-sm text-gray-500">
                     {s.lastAction}
+                    <span className="block text-xs text-gray-400 mt-0.5">
+                      {new Date(s.lastActionDate + "T00:00:00").toLocaleDateString(
+                        "en-US",
+                        { month: "short", day: "numeric", year: "numeric" }
+                      )}
+                    </span>
                   </td>
                 </tr>
               ))}
@@ -128,6 +134,13 @@ export default function StateTable() {
               )}
               <p className="text-xs text-gray-400 mt-2 italic">
                 {s.lastAction}
+              </p>
+              <p className="text-[10px] text-gray-400 mt-0.5">
+                Updated{" "}
+                {new Date(s.lastActionDate + "T00:00:00").toLocaleDateString(
+                  "en-US",
+                  { month: "short", day: "numeric", year: "numeric" }
+                )}
               </p>
             </div>
           ))}

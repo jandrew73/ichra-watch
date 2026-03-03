@@ -79,6 +79,13 @@ function StateTooltip({ data }: { data: StateLegislation }) {
         </p>
       )}
       <p className="text-xs text-gray-400 mt-2 italic">{data.lastAction}</p>
+      <p className="text-[10px] text-gray-400 mt-1">
+        Updated{" "}
+        {new Date(data.lastActionDate + "T00:00:00").toLocaleDateString(
+          "en-US",
+          { month: "short", day: "numeric", year: "numeric" }
+        )}
+      </p>
     </div>
   );
 }

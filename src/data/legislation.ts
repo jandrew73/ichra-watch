@@ -103,15 +103,15 @@ export const stateLegislation: StateLegislation[] = [
     billNumber: "HB 1110",
     billName: "Georgia Small Business Healthcare Affordability Act",
     summary:
-      "Bipartisan bill providing tiered tax credits to small employers offering ICHRAs. Currently in House committee.",
+      "Bipartisan bill providing tiered tax credits to small employers offering ICHRAs. Passed House Ways and Means Committee; advancing to House Rules Committee.",
     taxCredit:
       "$600/employee (Years 1-3), $400/employee (Year 4), $200/employee (Year 5)",
     eligibility: "Employers with 10 or fewer employees",
     cap: "$5 million annual program cap",
     houseStatus: "committee",
     senateStatus: "not_introduced",
-    lastAction: "Referred to House Ways and Means Committee",
-    lastActionDate: "2026-02-03",
+    lastAction: "Passed House Ways and Means Committee; advancing to House Rules Committee",
+    lastActionDate: "2026-03-02",
     sourceUrl:
       "https://www.legis.ga.gov/legislation/76893",
   },
@@ -267,6 +267,16 @@ export const federalBills: FederalBill[] = [
 
 export const newsItems: NewsItem[] = [
   {
+    id: "news-9",
+    date: "2026-03-02",
+    headline: "Georgia HB 1110 Passes House Ways and Means Committee",
+    summary:
+      "HB 1110, the Georgia Small Business Healthcare Affordability Act, advances from the House Ways and Means Committee. The bill now moves to the House Rules Committee.",
+    state: "GA",
+    type: "state",
+    sourceUrl: "https://www.legis.ga.gov/legislation/76893",
+  },
+  {
     id: "news-1",
     date: "2026-02-03",
     headline: "Georgia ICHRA Tax Credit Bill Advances in Committee",
@@ -274,6 +284,7 @@ export const newsItems: NewsItem[] = [
       "HB 1110, the Georgia Small Business Healthcare Affordability Act, is referred to the House Ways and Means Committee for consideration.",
     state: "GA",
     type: "state",
+    sourceUrl: "https://www.legis.ga.gov/legislation/76893",
   },
   {
     id: "news-2",
@@ -283,6 +294,7 @@ export const newsItems: NewsItem[] = [
       "SB 2868 passes the Mississippi Senate unanimously, providing tax credits up to $400 per employee for small businesses adopting ICHRAs.",
     state: "MS",
     type: "state",
+    sourceUrl: "http://billstatus.ls.state.ms.us/2026/pdf/history/SB/SB2868.xml",
   },
   {
     id: "news-3",
@@ -291,6 +303,7 @@ export const newsItems: NewsItem[] = [
     summary:
       "The Lower Health Care Premiums for All Americans Act passes 216-211, containing key CHOICE Arrangement language to codify ICHRAs.",
     type: "federal",
+    sourceUrl: "https://www.congress.gov/bill/119th-congress/house-bill/6703",
   },
   {
     id: "news-4",
@@ -299,6 +312,7 @@ export const newsItems: NewsItem[] = [
     summary:
       "H.R. 6708 is introduced as a standalone bill to permanently codify ICHRA into federal statute.",
     type: "federal",
+    sourceUrl: "https://www.congress.gov/bill/119th-congress/house-bill/6708",
   },
   {
     id: "news-5",
@@ -307,6 +321,7 @@ export const newsItems: NewsItem[] = [
     summary:
       "ICHRA codification language removed from H.R. 1 during Senate negotiations. Advocates look to standalone bills as alternative path.",
     type: "federal",
+    sourceUrl: "https://www.congress.gov/bill/119th-congress/house-bill/1",
   },
   {
     id: "news-6",
@@ -316,6 +331,7 @@ export const newsItems: NewsItem[] = [
       "HB 133 passes the Ohio House with full bipartisan support, offering $400/employee credits for small businesses.",
     state: "OH",
     type: "state",
+    sourceUrl: "https://www.legislature.ohio.gov/legislation/136/hb133",
   },
   {
     id: "news-7",
@@ -325,6 +341,7 @@ export const newsItems: NewsItem[] = [
       "HB 2694 introduced in Arizona to create tax credit incentives for small employers offering ICHRAs.",
     state: "AZ",
     type: "state",
+    sourceUrl: "https://www.azleg.gov/legtext/57leg/1R/bills/HB2694S.htm",
   },
   {
     id: "news-8",

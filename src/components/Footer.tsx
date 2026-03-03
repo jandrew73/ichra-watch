@@ -53,13 +53,13 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Founding Sponsors */}
+          {/* Sponsors */}
           <div>
             <h4 className="text-sm font-semibold uppercase tracking-wide text-slate-400 mb-3">
-              Founding Sponsors
+              Our Sponsors
             </h4>
             <p className="text-sm text-slate-400 mb-2">
-              This project is supported by its founding sponsors. Interested in
+              This project is supported by its sponsors. Interested in
               sponsoring?{" "}
               <a
                 href="mailto:info@ichrawatch.com"
@@ -70,13 +70,18 @@ export default function Footer() {
               .
             </p>
             <div className="flex gap-4 mt-3">
-              {/* Placeholder for sponsor logos */}
-              <div className="w-20 h-8 rounded bg-white/10 flex items-center justify-center text-xs text-slate-500">
-                Sponsor
-              </div>
-              <div className="w-20 h-8 rounded bg-white/10 flex items-center justify-center text-xs text-slate-500">
-                Sponsor
-              </div>
+              <a
+                href="/sponsors"
+                className="px-4 h-8 rounded bg-white/10 hover:bg-white/20 transition-colors flex items-center justify-center text-xs text-slate-300 font-medium"
+              >
+                Founding Sponsors
+              </a>
+              <a
+                href="/sponsors"
+                className="px-4 h-8 rounded bg-white/10 hover:bg-white/20 transition-colors flex items-center justify-center text-xs text-slate-300 font-medium"
+              >
+                Sponsors
+              </a>
             </div>
           </div>
         </div>

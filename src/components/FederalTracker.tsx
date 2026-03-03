@@ -103,7 +103,16 @@ function BillPipeline({ bill }: { bill: FederalBill }) {
       )}
 
       <div className="flex items-center justify-between mt-3 pt-3 border-t border-gray-100">
-        <p className="text-xs text-gray-400">{bill.lastAction}</p>
+        <div>
+          <p className="text-xs text-gray-400">{bill.lastAction}</p>
+          <p className="text-[10px] text-gray-400 mt-0.5">
+            Updated{" "}
+            {new Date(bill.lastActionDate + "T00:00:00").toLocaleDateString(
+              "en-US",
+              { month: "short", day: "numeric", year: "numeric" }
+            )}
+          </p>
+        </div>
         {bill.sourceUrl && (
           <a
             href={bill.sourceUrl}

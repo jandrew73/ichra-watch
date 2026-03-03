@@ -6,17 +6,17 @@ export default function Navigation() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const links = [
-    { href: "#map", label: "State Map" },
-    { href: "#states", label: "State Detail" },
-    { href: "#federal", label: "Federal" },
-    { href: "#news", label: "News" },
-    { href: "#resources", label: "Resources" },
+    { href: "/#map", label: "State Map" },
+    { href: "/#states", label: "State Detail" },
+    { href: "/#federal", label: "Federal" },
+    { href: "/#news", label: "News" },
+    { href: "/#resources", label: "Resources" },
   ];
 
   return (
     <nav className="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-gray-200">
       <div className="max-w-6xl mx-auto px-4 flex items-center justify-between h-14">
-        <a href="#" className="font-bold text-gray-900 text-lg">
+        <a href="/" className="font-bold text-gray-900 text-lg">
           ICHRA <span className="text-blue-600">Watch</span>
         </a>
 
