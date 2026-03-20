@@ -1,5 +1,5 @@
 // ICHRA Legislation Tracker - Data File
-// Last updated: 2026-03-03 (fact-checked and corrected)
+// Last updated: 2026-03-20 (updated via LegiScan API verification)
 // Phase 1: Manual updates. Phase 2: LegiScan API integration.
 
 export type LegislationStatus =
@@ -119,17 +119,17 @@ export const stateLegislation: StateLegislation[] = [
     state: "Mississippi",
     stateCode: "MS",
     status: "passed_one_chamber",
-    billNumber: "SB 2868",
+    billNumber: "SB 2868 / HB 343",
     billName: "Mississippi ICHRA Tax Credit Act",
     summary:
-      "Passed Senate 49-0. Bipartisan legislation providing tax credits for small employer ICHRA adoption.",
+      "Companion bills passed both chambers with amendments. Senate declined to concur with House amendments; conference committee invited. Both bills advancing through conference.",
     taxCredit: "Up to $400/employee",
     eligibility: "Employers with fewer than 50 employees",
     cap: "$10 million annual program cap",
-    houseStatus: "pending",
+    houseStatus: "passed",
     senateStatus: "passed",
-    lastAction: "Passed Senate 49-0; referred to House",
-    lastActionDate: "2026-02-25",
+    lastAction: "Both chambers passed with amendments; declined to concur, conference committee invited",
+    lastActionDate: "2026-03-19",
     sourceUrl:
       "http://billstatus.ls.state.ms.us/2026/pdf/history/SB/SB2868.xml",
   },
@@ -181,27 +181,44 @@ export const stateLegislation: StateLegislation[] = [
     status: "introduced",
     billNumber: "SB 635",
     summary:
-      "Senate bill to provide tax incentives for ICHRA adoption among small businesses.",
+      "Senate bill to establish an HRA tax credit program. Senate Ways and Means Committee voted Ought to Pass with Amendment (3-2). Amendment adopted by voice vote; laid on table pending referral to Finance Committee.",
     houseStatus: "not_introduced",
     senateStatus: "committee",
-    lastAction: "Referred to Senate Commerce Committee",
-    lastActionDate: "2025-11-15",
+    lastAction: "Senate adopted amendment by voice vote; laid on table pending referral to Finance Committee",
+    lastActionDate: "2026-03-05",
+    sourceUrl:
+      "https://gc.nh.gov/bill_status/legacy/bs2016/bill_status.aspx?lsr=2214&sy=2026&sortoption=&txtsessionyear=2026&txtbillnumber=SB635",
   },
   {
     state: "Florida",
     stateCode: "FL",
     status: "introduced",
-    billNumber: "HB 141",
+    billNumber: "HB 141 / SB 440 / SB 1460",
     billName: "Florida Employee Health Choices Program",
     summary:
-      "Creates a state-facilitated platform for employees enrolled in ICHRAs to purchase individual health insurance plans. Effective July 1, 2026. Companion bills: SB 440, SB 1460.",
+      "Creates a state-facilitated platform for employees enrolled in ICHRAs to purchase individual health insurance plans. HB 141 died in Insurance & Banking Subcommittee (March 13). Companion Senate bills SB 440 and SB 1460 remain active in committee.",
+    houseStatus: "not_introduced",
+    senateStatus: "committee",
+    lastAction:
+      "HB 141 died in subcommittee; Senate companions SB 440 and SB 1460 still in committee",
+    lastActionDate: "2026-03-13",
+    sourceUrl:
+      "https://www.flsenate.gov/Session/Bill/2026/440",
+  },
+  {
+    state: "Connecticut",
+    stateCode: "CT",
+    status: "introduced",
+    billNumber: "HB 5041",
+    billName: "An Act Expanding Health Care Coverage",
+    summary:
+      "Governor's budget bill expanding health care coverage, including ICHRA-related provisions. Received Joint Favorable report from Human Services Committee.",
     houseStatus: "committee",
     senateStatus: "not_introduced",
-    lastAction:
-      "Passed Health Care Facilities & Systems Subcommittee 12-3; referred to Insurance & Banking Subcommittee",
-    lastActionDate: "2026-01-13",
+    lastAction: "Joint Favorable report from Human Services Committee",
+    lastActionDate: "2026-03-19",
     sourceUrl:
-      "https://www.myfloridahouse.gov/Sections/Bills/billsdetail.aspx?BillId=80953",
+      "https://www.cga.ct.gov/asp/cgabillstatus/cgabillstatus.asp?selBillType=Bill&bill_num=HB05041&which_year=2026",
   },
 ];
 
@@ -259,6 +276,36 @@ export const federalBills: FederalBill[] = [
     notes:
       "⚠️ ICHRA provisions were stripped. CHOICE codification must pass through other vehicles (H.R. 6703 or H.R. 6708).",
   },
+  {
+    id: "hr5463",
+    billNumber: "H.R. 5463",
+    title: "Choice Arrangement Act",
+    shortTitle: "CHOICE Arrangement Act",
+    summary:
+      "Amends the Internal Revenue Code to provide for employer-provided health reimbursement arrangements integrated with individual market coverage. House companion to Senate CHOICE Act (S. 2875).",
+    houseStatus: "committee",
+    senateStatus: "not_introduced",
+    signedIntoLaw: false,
+    lastAction: "Referred to House Committee on Ways and Means",
+    lastActionDate: "2025-09-18",
+    congress: "119th",
+    sourceUrl: "https://www.congress.gov/bill/119th-congress/house-bill/5463/all-info",
+  },
+  {
+    id: "sb2875",
+    billNumber: "S. 2875",
+    title: "CHOICE Act — Custom Health Option and Individual Care Expense Act",
+    shortTitle: "CHOICE Act",
+    summary:
+      "Senate bill to amend the Internal Revenue Code to provide for health reimbursement arrangements integrated with individual market coverage. Senate companion to H.R. 5463.",
+    houseStatus: "not_introduced",
+    senateStatus: "committee",
+    signedIntoLaw: false,
+    lastAction: "Read twice and referred to Committee on Finance",
+    lastActionDate: "2025-09-18",
+    congress: "119th",
+    sourceUrl: "https://www.congress.gov/bill/119th-congress/senate-bill/2875/all-info",
+  },
 ];
 
 // ============================================================
@@ -266,6 +313,71 @@ export const federalBills: FederalBill[] = [
 // ============================================================
 
 export const newsItems: NewsItem[] = [
+  {
+    id: "news-15",
+    date: "2026-03-19",
+    headline: "Connecticut Introduces ICHRA-Related Health Coverage Bill",
+    summary:
+      "HB 5041, a Governor's budget bill expanding health care coverage with ICHRA provisions, receives Joint Favorable report from the Human Services Committee.",
+    state: "CT",
+    type: "state",
+    sourceUrl:
+      "https://www.cga.ct.gov/asp/cgabillstatus/cgabillstatus.asp?selBillType=Bill&bill_num=HB05041&which_year=2026",
+  },
+  {
+    id: "news-14",
+    date: "2026-03-19",
+    headline: "Mississippi ICHRA Bills Head to Conference Committee",
+    summary:
+      "Both SB 2868 and companion HB 343 passed their opposing chambers with amendments. Both chambers declined to concur, inviting a conference committee to resolve differences.",
+    state: "MS",
+    type: "state",
+    sourceUrl:
+      "http://billstatus.ls.state.ms.us/2026/pdf/history/SB/SB2868.xml",
+  },
+  {
+    id: "news-13",
+    date: "2026-03-13",
+    headline: "Florida HB 141 Dies in Subcommittee",
+    summary:
+      "HB 141, the Florida Health Choices Program bill, died in the Insurance & Banking Subcommittee. Senate companion bills SB 440 and SB 1460 remain active.",
+    state: "FL",
+    type: "state",
+    sourceUrl:
+      "https://www.flsenate.gov/Session/Bill/2026/141",
+  },
+  {
+    id: "news-12",
+    date: "2026-03-05",
+    headline: "New Hampshire Senate Advances ICHRA Tax Credit Bill",
+    summary:
+      "SB 635 receives Ought to Pass with Amendment recommendation from Senate Ways and Means Committee (3-2 vote). Amendment adopted by voice vote; pending referral to Finance Committee.",
+    state: "NH",
+    type: "state",
+    sourceUrl:
+      "https://gc.nh.gov/bill_status/legacy/bs2016/bill_status.aspx?lsr=2214&sy=2026&sortoption=&txtsessionyear=2026&txtbillnumber=SB635",
+  },
+  {
+    id: "news-11",
+    date: "2025-09-18",
+    headline: "CHOICE Arrangement Bills Introduced in Both Chambers",
+    summary:
+      "H.R. 5463 (House) and S. 2875 (Senate) introduced to codify employer-provided health reimbursement arrangements integrated with individual market coverage.",
+    type: "federal",
+    sourceUrl:
+      "https://www.congress.gov/bill/119th-congress/house-bill/5463/all-info",
+  },
+  {
+    id: "news-10",
+    date: "2026-03-17",
+    headline: "Mississippi House Passes Amended ICHRA Tax Credit Bill",
+    summary:
+      "HB 343, the companion ICHRA tax credit bill, passes the Mississippi Senate with amendments and is returned to the House for concurrence.",
+    state: "MS",
+    type: "state",
+    sourceUrl:
+      "http://billstatus.ls.state.ms.us/2026/pdf/history/HB/HB0343.xml",
+  },
   {
     id: "news-9",
     date: "2026-03-02",

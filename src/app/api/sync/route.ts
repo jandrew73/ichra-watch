@@ -5,12 +5,14 @@ import { searchBills, getBill, mapLegiScanStatus, stateNames } from "@/lib/legis
 // Vercel Cron: runs weekly on Sunday at 10am UTC (after LegiScan's 5am ET dataset build)
 // Also callable manually via POST with CRON_SECRET header
 
-// Core ICHRA search terms — start focused, expand if needed
+// Core ICHRA search terms — covers direct ICHRA references + federal CHOICE bills
 const SEARCH_TERMS = [
   "ICHRA",
   '"individual coverage health reimbursement arrangement"',
   '"individual coverage HRA"',
   '"individual coverage health reimbursement"',
+  '"CHOICE arrangement"',
+  '"health reimbursement arrangement" tax credit',
 ];
 
 // Minimum relevance score to include a bill (LegiScan uses 0-100)
