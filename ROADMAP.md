@@ -25,64 +25,77 @@ _Status: **Complete** (launched March 2026)_
 - [x] Manual data updates via `src/data/legislation.ts`
 
 ### Current Data Coverage (Phase 1)
-- **9 states tracked:** AL, GA, IL, IN, MO, SC, UT, VA, WI
-- **3 federal bills tracked:** CHOICE Arrangement Act, ICHRA Improvement Act, Bipartisan HSA Expansion
+- **9 states tracked:** IN, OH, GA, MS, TX, AZ, WI, NH, FL
+- **3 federal bills tracked:** H.R. 6703, H.R. 6708, H.R. 1
 - **9 news items** with source URLs
 
 ---
 
 ## Phase 2: LegiScan API Integration 🔜
 
-_Status: **Up Next** — API access request submitted March 3, 2026 (pending approval)_
+_Status: **In Progress** — API key approved March 2026_
 
 The goal is to automate legislation data updates by integrating the [LegiScan API](https://legiscan.com/legiscan) so the site stays current without manual edits.
 
-### LegiScan License & Compliance
-- **License type:** Commercial, externally published
+### LegiScan Account & Compliance
+- **API Key:** Approved (Public API, free tier)
+- **Monthly limit:** 30,000 queries (resets on the 1st)
 - **Data license:** Creative Commons Attribution 4.0 (CC BY 4.0)
-- **Attribution required:** LegiScan must be credited as the legislative data source on the site
-- [ ] Add LegiScan attribution to footer and/or data source credits
-- [ ] Review CC BY 4.0 terms and ensure full compliance
+- **Attribution required:** LegiScan must be credited as the legislative data source
+- [x] Add LegiScan attribution to footer with CC BY 4.0 link
+- [x] Store API key securely (Vercel environment variable — `LEGISCAN_API_KEY`)
+- [ ] Review CC BY 4.0 terms for full compliance
+
+### Compliance Rules (from LegiScan Crash Course)
+- **Use hashes:** Always compare `change_hash` / `dataset_hash` before re-fetching. Failure to use `dataset_hash` = suspended access.
+- **No scraping:** legiscan.com frontend scraping is prohibited.
+- **One API key:** Creating multiple Public API keys is prohibited.
+- **Cache locally:** Store JSON responses to minimize query spend.
+- **No duplicate dataset downloads:** Use `dataset_hash` to prevent re-downloading unchanged datasets.
 
 ### Scope & Query Strategy
 - **Coverage:** All 50 states + federal (US Congress)
 - **Bill volume:** ~50–75 ICHRA-related bills active at any given time
-- **Polling cadence:** Weekly automated polling via REST API
-- **Query approach:** ICHRA-related keywords + known bill numbers
-- **Infrastructure:** Vercel serverless functions (dynamic IP pool)
+- **Polling cadence:** Weekly automated polling (Vercel Cron, Sundays 10am UTC)
+- **Search terms:** `ICHRA`, `"individual coverage health reimbursement arrangement"`, `"individual coverage HRA"`, `"individual coverage health reimbursement"`
+- **Relevance threshold:** Minimum 50% relevance score from LegiScan search
+- **Infrastructure:** Vercel serverless functions + Supabase (Postgres)
 
 ### Data Processing Pipeline
-- **Storage:** Structured SQL database for LegiScan results
-- **AI-assisted processing:** LLM tooling to summarize bill text and flag ICHRA-relevant provisions
-- **Human editorial review:** All AI-processed data reviewed by humans before publishing
-- **Workflow:** API fetch → SQL store → AI annotation → human review → publish to site
+- **Storage:** Supabase (Postgres) — `bills`, `sync_log`, `search_cache` tables
+- **Sync workflow:** LegiScan `getSearchRaw` → compare `change_hash` → `getBill` for changed bills → upsert to Supabase
+- **Human editorial review:** Review new/changed bills in Supabase dashboard before major updates
+- **Fallback:** Static `legislation.ts` data used if Supabase is unavailable
 
-### 2.1 — LegiScan API Setup
-- [ ] Receive API key approval from LegiScan
-- [ ] Store API key securely (Vercel environment variable)
-- [ ] Explore API endpoints: `getBill`, `getSearch`, `getMasterList`
-- [ ] Document rate limits and data structure
-- [ ] Choose and provision SQL database (e.g., Vercel Postgres, PlanetScale, Supabase)
+### 2.1 — LegiScan API Setup ✅
+- [x] Receive API key approval from LegiScan
+- [x] Store API key securely (Vercel environment variable)
+- [x] Build API client (`src/lib/legiscan.ts`) with `searchBills()`, `getBill()`, status mapping
+- [x] Document rate limits and compliance rules
+- [x] Choose database: Supabase (Postgres, free tier, 500MB)
 
-### 2.2 — Data Pipeline
-- [ ] Build API utility (`src/lib/legiscan.ts`) to fetch bill data
-- [ ] Design database schema for bills, statuses, history, and metadata
-- [ ] Map LegiScan bill statuses → our `LegislationStatus` / `ChamberStatus` types
-- [ ] Normalize LegiScan data to match existing `StateLegislation` and `FederalBill` interfaces
-- [ ] Handle edge cases: bills with no status, unusual chamber flows, dead bills
-- [ ] Add `lastUpdated` timestamp to track data freshness
+### 2.2 — Database & Data Pipeline ✅
+- [x] Design database schema (`supabase/schema.sql`): `bills`, `sync_log`, `search_cache`
+- [x] Map LegiScan status codes → our `LegislationStatus` categories (enacted, passed_one_chamber, introduced, no_activity)
+- [x] Build data access layer (`src/lib/data.ts`) with Supabase → static fallback
+- [x] Normalize LegiScan data to match `StateLegislation` and `FederalBill` interfaces
+- [x] Derive house/senate chamber status from bill history
+- [x] Handle new states automatically (no hardcoded state list)
+- [x] Row-level security: public read, service-role write
 
-### 2.3 — AI Summarization Layer
+### 2.3 — Scheduled Data Refresh ✅
+- [x] Create sync API route (`/api/sync`) with auth via `CRON_SECRET`
+- [x] Implement weekly Vercel Cron (Sundays 10am UTC, after LegiScan's 5am ET dataset build)
+- [x] Hash-based change detection: only fetch full bill details when `change_hash` differs
+- [x] Sync logging: track queries used, bills found/created/updated, errors
+- [x] Fallback to static data if Supabase is unavailable
+- [x] ISR revalidation every 1 hour for frontend data freshness
+
+### 2.4 — AI Summarization Layer (Future)
 - [ ] Build LLM pipeline to summarize bill text for ICHRA relevance
 - [ ] Flag ICHRA-specific provisions (tax credits, eligibility, caps)
 - [ ] Human review queue: admin interface to approve/edit AI summaries before publish
 - [ ] Fallback: manual summary entry when AI confidence is low
-
-### 2.4 — Scheduled Data Refresh
-- [ ] Create Next.js API route or serverless function for data fetching
-- [ ] Implement weekly automated polling (cron job via Vercel or external scheduler)
-- [ ] Add fallback to static data if API is unavailable
-- [ ] Log update history for debugging
 
 ### 2.5 — Congress.gov Integration (Federal Bills)
 - [ ] Research Congress.gov API or bulk data options
@@ -93,24 +106,24 @@ The goal is to automate legislation data updates by integrating the [LegiScan AP
 - [ ] Add data validation layer (reject bad/incomplete API responses)
 - [ ] Compare API data against known-good snapshot to catch anomalies
 - [ ] Build simple admin/status page to monitor data health
-- [ ] Alert mechanism if data hasn't updated in 24+ hours
+- [ ] Alert mechanism if data hasn't updated in 7+ days
 
 ### 2.7 — Expand Coverage to All 50 States
-- [ ] Set up LegiScan keyword monitoring for ICHRA-related terms across all 50 states
-- [ ] Auto-detect new state bills as they're introduced
+- [x] Set up LegiScan keyword monitoring for ICHRA-related terms across all 50 states
+- [x] Auto-detect new state bills as they're introduced
 - [ ] Auto-generate news items from significant status changes
 - [ ] Add more federal bills as they're introduced
-- [ ] Update map to show all 50 states with live data
+- [x] Map dynamically shows all states with live data (no hardcoded list)
 
 ---
 
 ## Phase 3: Real-Time Updates & Notifications 🔮
 
-_Status: **Future**_
+_Status: **Future** — Supabase real-time capabilities available when ready_
 
 ### 3.1 — Real-Time Data Push
 - [ ] Evaluate LegiScan push/webhook options vs. frequent polling
-- [ ] Implement WebSocket or Server-Sent Events for live UI updates
+- [ ] Implement Supabase real-time subscriptions for live UI updates
 - [ ] Show "last updated" timestamp prominently on the site
 - [ ] Real-time status badge changes on the map without page reload
 
@@ -161,13 +174,15 @@ _Features to consider as the project grows._
 | Language | TypeScript |
 | Styling | Tailwind CSS v4 |
 | Map | react-simple-maps + d3-geo |
+| Database | Supabase (Postgres) |
 | Hosting | Vercel (hobby tier) |
 | DNS | Cloudflare |
 | Email | Cloudflare Email Routing |
-| Data (Phase 1) | Static TypeScript (`legislation.ts`) |
-| Data (Phase 2) | LegiScan API + ISR |
+| Data (Phase 1) | Static TypeScript (`legislation.ts`) — fallback |
+| Data (Phase 2) | LegiScan API → Supabase → ISR |
+| Cron | Vercel Cron (weekly, Sundays 10am UTC) |
 | Repo | github.com/jandrew73/ichra-watch |
 
 ---
 
-_Last updated: March 3, 2026_
+_Last updated: March 20, 2026_

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, memo, useCallback } from "react";
+import { useState, memo, useCallback, useMemo } from "react";
 import {
   ComposableMap,
   Geographies,
@@ -9,7 +9,6 @@ import {
   Marker,
 } from "react-simple-maps";
 import {
-  stateLegislation,
   getStatusColor,
   getStatusLabel,
   type StateLegislation,
@@ -33,20 +32,25 @@ const fipsToState: Record<string, string> = {
   "56": "WY",
 };
 
-const stateDataMap = new Map<string, StateLegislation>();
-stateLegislation.forEach((s) => stateDataMap.set(s.stateCode, s));
-
-// Centroid coordinates [longitude, latitude] for states with active legislation
+// Centroid coordinates [longitude, latitude] for all US states
 const stateCentroids: Record<string, [number, number]> = {
-  IN: [-86.13, 39.85],
-  OH: [-82.76, 40.39],
-  GA: [-83.44, 32.68],
-  MS: [-89.68, 32.74],
-  TX: [-99.90, 31.47],
-  AZ: [-111.09, 34.05],
-  WI: [-89.62, 44.26],
-  NH: [-71.57, 43.19],
-  FL: [-81.52, 27.66],
+  AL: [-86.83, 32.79], AK: [-153.37, 63.35], AZ: [-111.09, 34.05],
+  AR: [-92.37, 34.97], CA: [-119.68, 36.12], CO: [-105.31, 39.06],
+  CT: [-72.76, 41.60], DE: [-75.51, 39.16], FL: [-81.52, 27.66],
+  GA: [-83.44, 32.68], HI: [-155.66, 19.90], ID: [-114.74, 44.24],
+  IL: [-89.20, 40.35], IN: [-86.13, 39.85], IA: [-93.21, 42.01],
+  KS: [-98.48, 38.53], KY: [-84.67, 37.67], LA: [-91.87, 31.17],
+  ME: [-69.38, 45.37], MD: [-76.64, 39.05], MA: [-71.53, 42.23],
+  MI: [-84.54, 44.35], MN: [-94.64, 46.39], MS: [-89.68, 32.74],
+  MO: [-92.29, 38.46], MT: [-109.63, 46.80], NE: [-99.90, 41.49],
+  NV: [-116.42, 38.31], NH: [-71.57, 43.19], NJ: [-74.41, 40.06],
+  NM: [-105.87, 34.52], NY: [-74.95, 43.30], NC: [-79.01, 35.76],
+  ND: [-100.47, 47.55], OH: [-82.76, 40.39], OK: [-97.09, 35.57],
+  OR: [-120.55, 43.80], PA: [-77.21, 41.20], RI: [-71.48, 41.58],
+  SC: [-80.95, 33.86], SD: [-99.44, 43.95], TN: [-86.58, 35.84],
+  TX: [-99.90, 31.47], UT: [-111.09, 39.32], VT: [-72.58, 44.05],
+  VA: [-79.35, 37.77], WA: [-120.74, 47.75], WV: [-80.62, 38.35],
+  WI: [-89.62, 44.26], WY: [-107.29, 43.08],
 };
 
 function StateTooltip({ data }: { data: StateLegislation }) {
@@ -90,11 +94,17 @@ function StateTooltip({ data }: { data: StateLegislation }) {
   );
 }
 
-function USMap() {
+function USMap({ stateBills }: { stateBills: StateLegislation[] }) {
   const [tooltipContent, setTooltipContent] = useState<StateLegislation | null>(
     null
   );
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
+
+  const stateDataMap = useMemo(() => {
+    const map = new Map<string, StateLegislation>();
+    stateBills.forEach((s) => map.set(s.stateCode, s));
+    return map;
+  }, [stateBills]);
 
   const handleMouseEnter = useCallback(
     (stateCode: string, event: React.MouseEvent) => {
@@ -104,7 +114,7 @@ function USMap() {
         setTooltipPos({ x: event.clientX, y: event.clientY });
       }
     },
-    []
+    [stateDataMap]
   );
 
   const handleMouseMove = useCallback(
@@ -188,7 +198,7 @@ function USMap() {
               }
             </Geographies>
             {/* State abbreviation labels for active states */}
-            {stateLegislation.map((s) => {
+            {stateBills.map((s) => {
               const coords = stateCentroids[s.stateCode];
               if (!coords) return null;
               return (

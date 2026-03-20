@@ -1,13 +1,13 @@
 "use client";
 
 import {
-  stateLegislation,
   getStatusColor,
   getStatusLabel,
+  type StateLegislation,
 } from "@/data/legislation";
 
-export default function StateTable() {
-  const sorted = [...stateLegislation].sort((a, b) => {
+export default function StateTable({ stateBills }: { stateBills: StateLegislation[] }) {
+  const sorted = [...stateBills].sort((a, b) => {
     const order = { enacted: 0, passed_one_chamber: 1, introduced: 2, no_activity: 3 };
     return order[a.status] - order[b.status];
   });
@@ -20,7 +20,7 @@ export default function StateTable() {
             State Legislation Detail
           </h2>
           <p className="text-gray-600">
-            All {stateLegislation.length} states with active ICHRA legislation
+            All {stateBills.length} states with active ICHRA legislation
           </p>
         </div>
 

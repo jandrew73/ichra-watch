@@ -1,6 +1,6 @@
 "use client";
 
-import { federalBills, type FederalBill } from "@/data/legislation";
+import { type FederalBill } from "@/data/legislation";
 
 function PipelineStep({
   label,
@@ -128,7 +128,7 @@ function BillPipeline({ bill }: { bill: FederalBill }) {
   );
 }
 
-export default function FederalTracker() {
+export default function FederalTracker({ federalBills }: { federalBills: FederalBill[] }) {
   return (
     <section className="py-12 sm:py-16 bg-gray-50" id="federal">
       <div className="max-w-6xl mx-auto px-4">

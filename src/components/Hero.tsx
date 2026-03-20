@@ -1,6 +1,12 @@
-import { summaryStats } from "@/data/legislation";
+interface SummaryStats {
+  totalStatesWithActivity: number;
+  enacted: number;
+  passedOneChamber: number;
+  introduced: number;
+  federalBillsTracked: number;
+}
 
-export default function Hero() {
+export default function Hero({ stats }: { stats: SummaryStats }) {
   return (
     <section className="bg-gradient-to-b from-slate-900 to-slate-800 text-white">
       <div className="max-w-6xl mx-auto px-4 py-16 sm:py-20">
@@ -17,23 +23,23 @@ export default function Hero() {
           {/* Quick Stats */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl mx-auto">
             <StatCard
-              number={summaryStats.totalStatesWithActivity}
+              number={stats.totalStatesWithActivity}
               label="States With Bills"
               sublabel="Introduced or enacted"
               color="text-blue-400"
             />
             <StatCard
-              number={summaryStats.enacted}
+              number={stats.enacted}
               label="Enacted"
               color="text-green-400"
             />
             <StatCard
-              number={summaryStats.passedOneChamber}
+              number={stats.passedOneChamber}
               label="Passed 1 Chamber"
               color="text-amber-400"
             />
             <StatCard
-              number={summaryStats.federalBillsTracked}
+              number={stats.federalBillsTracked}
               label="Federal Bills"
               color="text-purple-400"
             />

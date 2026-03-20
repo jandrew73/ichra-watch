@@ -1,4 +1,4 @@
-import { newsItems } from "@/data/legislation";
+import { type NewsItem } from "@/data/legislation";
 
 function formatDate(dateStr: string): string {
   const date = new Date(dateStr + "T00:00:00");
@@ -25,7 +25,7 @@ function TypeBadge({ type }: { type: "state" | "federal" | "industry" }) {
   );
 }
 
-export default function NewsFeed() {
+export default function NewsFeed({ newsItems }: { newsItems: NewsItem[] }) {
   const sorted = [...newsItems].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );

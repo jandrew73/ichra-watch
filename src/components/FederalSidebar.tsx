@@ -1,6 +1,6 @@
 "use client";
 
-import { federalBills, type FederalBill } from "@/data/legislation";
+import { type FederalBill } from "@/data/legislation";
 
 function StatusDot({
   status,
@@ -66,7 +66,7 @@ function CompactBillCard({ bill }: { bill: FederalBill }) {
   );
 }
 
-export default function FederalSidebar() {
+export default function FederalSidebar({ federalBills }: { federalBills: FederalBill[] }) {
   return (
     <div className="bg-gray-50 rounded-xl border border-gray-200 p-4">
       <h3 className="font-bold text-gray-900 text-base mb-1">

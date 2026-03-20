@@ -7,12 +7,30 @@ import FederalTracker from "@/components/FederalTracker";
 import NewsFeed from "@/components/NewsFeed";
 import Resources from "@/components/Resources";
 import Footer from "@/components/Footer";
+import { getStateLegislation, getFederalBills, getNewsItems } from "@/lib/data";
 
-export default function Home() {
+export const revalidate = 3600; // Revalidate data every hour
+
+export default async function Home() {
+  const [stateBills, federalBills, newsItems] = await Promise.all([
+    getStateLegislation(),
+    getFederalBills(),
+    getNewsItems(),
+  ]);
+
+  // Compute summary stats from live data
+  const summaryStats = {
+    totalStatesWithActivity: stateBills.length,
+    enacted: stateBills.filter((s) => s.status === "enacted").length,
+    passedOneChamber: stateBills.filter((s) => s.status === "passed_one_chamber").length,
+    introduced: stateBills.filter((s) => s.status === "introduced").length,
+    federalBillsTracked: federalBills.length,
+  };
+
   return (
     <>
       <Navigation />
-      <Hero />
+      <Hero stats={summaryStats} />
 
       {/* Legislation at a Glance — Map + Federal Sidebar */}
       <section className="py-10 sm:py-14" id="map">
@@ -26,16 +44,16 @@ export default function Home() {
 
           <div className="grid lg:grid-cols-[1fr_340px] gap-6 items-start">
             {/* Map */}
-            <USMap />
+            <USMap stateBills={stateBills} />
             {/* Federal sidebar */}
-            <FederalSidebar />
+            <FederalSidebar federalBills={federalBills} />
           </div>
         </div>
       </section>
 
-      <StateTable />
-      <FederalTracker />
-      <NewsFeed />
+      <StateTable stateBills={stateBills} />
+      <FederalTracker federalBills={federalBills} />
+      <NewsFeed newsItems={newsItems} />
       <Resources />
       <Footer />
     </>

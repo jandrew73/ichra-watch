@@ -106,11 +106,29 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-slate-800 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-slate-500">
-            © {new Date().getFullYear()} ICHRA Legislation Watch. Data updated
-            manually; verify with official sources.
+            © {new Date().getFullYear()} ICHRA Legislation Watch. Verify with
+            official sources.
           </p>
           <p className="text-xs text-slate-500">
-            Data sources: LegiScan, Congress.gov, state legislature websites
+            Legislative data provided by{" "}
+            <a
+              href="https://legiscan.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-slate-400 hover:text-slate-300 underline"
+            >
+              LegiScan
+            </a>{" "}
+            under{" "}
+            <a
+              href="https://creativecommons.org/licenses/by/4.0/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-slate-400 hover:text-slate-300 underline"
+            >
+              CC BY 4.0
+            </a>
+            . Additional sources: Congress.gov, state legislature websites.
           </p>
         </div>
       </div>
